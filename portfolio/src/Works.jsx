@@ -36,7 +36,7 @@ const worksData = [
   },
   {
     name: "Antspecs",
-    subtitle: "E-Commerce Website - Codebase Available",
+    subtitle: "E-Commerce Eyewear Website",
     description:
       "Led the development of a modern, responsive E-commerce platform. Built over 20+ dynamic pages and implemented secure session handling using JWT authentication. Closely collaborated with a UI/UX designer, backend developer, and project manager to ensure smooth user journeys and robust performance.",
     techStack: [
@@ -46,13 +46,13 @@ const worksData = [
       { icon: <SiJsonwebtokens />, name: "JWT" },
       { icon: <SiFigma />, name: "Figma" }
     ],
-    github: "https://github.com/your-antspecs-repo",
+    github: "https://github.com/Shubh-31/web-app",
     link: "#",
     color: "#ffe578"
   },
   {
     name: "In House Store App",
-    subtitle: "Internal Web App - Codebase Available",
+    subtitle: "Internal Web App for Advayanethra Pvt Ltd",
     description:
       "Designed and developed a comprehensive web solution tailored for store personnel. Integrated role-based login functionality and dynamic features to streamline inventory and sales operations. Worked alongside stakeholders and team members to align with internal business workflows.",
     techStack: [
@@ -62,7 +62,7 @@ const worksData = [
       { icon: <SiFigma />, name: "Figma" },
       { icon: <SiJsonwebtokens />, name: "JWT" }
     ],
-    github: "https://github.com/your-store-app-repo",
+    github: "https://github.com/Shubh-31/an-store-web/tree/initial-design-and-flows/ANStore",
     link: "#",
     color: "#fc815c"
   },
@@ -151,17 +151,6 @@ const Works = () => {
           >
             Dawn Digitech LLP
           </a>.
-        </p>
-        <p className="mt-4 text-gray-300 text-lg">
-          Completed <span className="font-semibold text-white">Master's in Computer Science</span> from{' '}
-          <a
-            href="https://mdu.ac.in/default.aspx"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline text-blue-400"
-          >
-            Maharishi Dayanand University
-          </a>{' '} in 2023 with 7.2 CGPA.
         </p>
       </div>
     </section>

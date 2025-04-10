@@ -1,4 +1,4 @@
-import logo from "./assets/images/name-logo-white.svg";
+import logo from "./assets/icons/headerlogo.png";
 import phone from "./assets/icons/phone.svg";
 import whatsapp from "./assets/icons/whatsapp.svg";
 import linkedIn from "./assets/icons/linkedin.svg";
@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <div className="bg-transparent h-screen flex flex-col justify-between relative">
       <header className="flex items-center justify-between px-4 mt-4 w-full max-w-screen-xl mx-auto">
-        <img src={logo} alt="logo" className="h-auto" />
+        <img src={logo} alt="logo" className="h-auto w-16 border rounded-lg border-blue-800" />
         <div className="flex gap-4 z-50">
           <a href="tel:+919717385313" className="transition-transform hover:scale-110">
             <img src={phone} alt="phone" className="h-auto w-7 p-1 rounded-md transition duration-200 hover:bg-[#007bff]" />
@@ -54,7 +54,7 @@ export default function Home() {
 
       {showDialog && (
         <div className="fixed inset-0 bg-transparent bg-opacity-40 z-999 flex items-center justify-center px-4 animate-fade-in">
-          <div className="bg-[#10172a] border border-gray-600 rounded-xl p-6 max-w-lg w-full text-white relative transition-transform duration-300 ease-in-out animate-slide-up">
+          <div className="bg-[#10172a] border border-gray-600 rounded-xl p-6 max-w-xl w-full text-white relative transition-transform duration-300 ease-in-out animate-slide-up">
             <button
               className="absolute top-3 right-3 text-gray-400 hover:text-red-500 text-xl cursor-pointer"
               onClick={() => setShowDialog(false)}
@@ -66,7 +66,7 @@ export default function Home() {
               I'm a results-driven Frontend Developer with over 2 years of hands-on experience in crafting responsive, accessible, and visually engaging web interfaces. I specialize in modern web technologies like React.js, Next.js, TailwindCSS, and JavaScript. My passion lies in building seamless user experiences through pixel-perfect design and optimized performance.
             </p>
             <p className="text-sm text-gray-300 text-center mb-2">
-              💼 Currently working at <a href="https://advayanethra.com/" className="text-blue-400 hover:underline" target="_blank">Advayanethra Pvt Ltd</a>
+              💼 Currently working at <span className="text-blue-400 hover:underline" target="_blank">Advayanethra Pvt Ltd</span>
             </p>
             <p className="text-sm text-gray-300 text-center mb-2">
               🧑‍💼 Former Team Lead at <a href="https://www.linkedin.com/company/dawn-digitech/posts/?feedView=all" className="text-blue-400 hover:underline" target="_blank">Dawn Digitech LLP</a> where I led a team of 10 members on a client project for <a href="https://www.docusign.com/" className="text-blue-400 hover:underline" target="_blank">DocuSign</a>
@@ -75,7 +75,7 @@ export default function Home() {
               🎓 Master's in Computer Science from <a href="https://mdu.ac.in/" className="text-blue-400 hover:underline" target="_blank">Maharishi Dayanand University</a> (2021–2023)
             </p>
             <p className="text-sm text-gray-300 text-center mb-4">
-              💻 Tech Stack: React.js, Next.js, TailwindCSS, JavaScript, Firebase, Node.js, Express.js, jQuery, ASP.NET
+              💻 Tech Stack: React.js, Next.js, TailwindCSS, JavaScript, Firebase, Node.js, Express.js, jQuery, ASP.NET, Git Version Control
             </p>
             <div className="text-sm text-gray-300 text-center mb-4">
               <h3 className="text-white font-semibold mb-2">📆 Career Timeline</h3>
