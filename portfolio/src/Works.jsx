@@ -1,6 +1,20 @@
 import React from "react";
 import { FaGithub } from "react-icons/fa";
-import { SiNextdotjs, SiTailwindcss, SiFirebase, SiHtml5, SiCss3, SiJquery, SiJavascript, SiReact, SiFigma, SiJsonwebtokens, SiNodedotjs, SiExpress, SiMongodb } from "react-icons/si";
+import {
+  SiNextdotjs,
+  SiTailwindcss,
+  SiFirebase,
+  SiHtml5,
+  SiCss3,
+  SiJquery,
+  SiJavascript,
+  SiReact,
+  SiFigma,
+  SiJsonwebtokens,
+  SiNodedotjs,
+  SiExpress,
+} from "react-icons/si";
+import { Toaster, toast } from "react-hot-toast";
 
 const worksData = [
   {
@@ -13,11 +27,11 @@ const worksData = [
       { icon: <SiTailwindcss />, name: "TailwindCSS" },
       { icon: <SiNodedotjs />, name: "Node.js" },
       { icon: <SiExpress />, name: "Express.js" },
-      { icon: <SiFirebase />, name: "Firebase" }
+      { icon: <SiFirebase />, name: "Firebase" },
     ],
     github: "https://github.com/Shubh-31/UI-Educon-Projecct",
     link: "https://www.ui-educon.com/",
-    color: "#47afa1"
+    color: "#47afa1",
   },
   {
     name: "To-Do App",
@@ -28,11 +42,11 @@ const worksData = [
       { icon: <SiHtml5 />, name: "HTML" },
       { icon: <SiCss3 />, name: "CSS Modules" },
       { icon: <SiJquery />, name: "jQuery" },
-      { icon: <SiJavascript />, name: "JavaScript" }
+      { icon: <SiJavascript />, name: "JavaScript" },
     ],
     github: "https://github.com/Shubh-31/To-Do-App",
     link: "https://to-do-app-phi-ebon.vercel.app/",
-    color: "#fc815c"
+    color: "#fc815c",
   },
   {
     name: "Antspecs",
@@ -44,11 +58,11 @@ const worksData = [
       { icon: <SiJavascript />, name: "JavaScript" },
       { icon: <SiCss3 />, name: "Traditional CSS" },
       { icon: <SiJsonwebtokens />, name: "JWT" },
-      { icon: <SiFigma />, name: "Figma" }
+      { icon: <SiFigma />, name: "Figma" },
     ],
     github: "https://github.com/Shubh-31/web-app",
     link: "#",
-    color: "#ffe578"
+    color: "#ffe578",
   },
   {
     name: "In House Store App",
@@ -60,11 +74,12 @@ const worksData = [
       { icon: <SiJavascript />, name: "JavaScript" },
       { icon: <SiTailwindcss />, name: "CSS" },
       { icon: <SiFigma />, name: "Figma" },
-      { icon: <SiJsonwebtokens />, name: "JWT" }
+      { icon: <SiJsonwebtokens />, name: "JWT" },
     ],
-    github: "https://github.com/Shubh-31/an-store-web/tree/initial-design-and-flows/ANStore",
+    github:
+      "https://github.com/Shubh-31/an-store-web/tree/initial-design-and-flows/ANStore",
     link: "#",
-    color: "#fc815c"
+    color: "#fc815c",
   },
   {
     name: "LMS Task",
@@ -74,25 +89,41 @@ const worksData = [
     techStack: [
       { icon: <SiReact />, name: "React.js" },
       { icon: <SiTailwindcss />, name: "TailwindCSS" },
-      { icon: <SiJavascript />, name: "JavaScript" }
+      { icon: <SiJavascript />, name: "JavaScript" },
     ],
     github: "https://github.com/Shubh-31/LMSTask",
     link: "https://lms-task-nu.vercel.app/",
-    color: "#1595b6"
-  }
+    color: "#1595b6",
+  },
 ];
+
+const handleGoToApp = (work) => {
+  if (work.name === "Antspecs" || work.name === "In House Store App") {
+    toast.error("Sorry, the server is currently down. Cannot run the website.");
+  } else {
+    window.open(work.link, "_blank");
+  }
+};
 
 const Works = () => {
   return (
     <section className="py-16 px-4 sm:px-8 max-w-6xl mx-auto text-white">
+      <p className="text-center text-blue-400 font-semibold mb-4 text-3xl">Projects & Career Highlights</p>
       {worksData.map((work) => (
         <div
           key={work.name}
           className="mb-16 border border-gray-700 rounded-2xl p-8 bg-transparent backdrop-blur-md shadow-md"
         >
           <div className="text-center">
-            <h3 className="font-bold text-2xl md:text-4xl" style={{ color: work.color }}>{work.name}</h3>
-            <p className="text-base md:text-lg text-gray-400">{work.subtitle}</p>
+            <h3
+              className="font-bold text-2xl md:text-4xl"
+              style={{ color: work.color }}
+            >
+              {work.name}
+            </h3>
+            <p className="text-base md:text-lg text-gray-400">
+              {work.subtitle}
+            </p>
           </div>
 
           <div className="mt-6 flex flex-wrap justify-center gap-6">
@@ -113,27 +144,30 @@ const Works = () => {
               href={work.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-[#111] hover:bg-gray-800 px-4 py-2 rounded transition"
+              className="flex items-center gap-2 bg-[#111] hover:bg-gray-800 px-4 py-2 rounded transition cursor-pointer"
             >
               <FaGithub /> View Code
             </a>
-            <a
-              href={work.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gradient-to-r from-[#1595b6] to-[#1f2667] text-white px-4 py-2 rounded hover:scale-105 transition"
+            <button
+              onClick={() => handleGoToApp(work)}
+              className="bg-gradient-to-r from-[#1595b6] to-[#1f2667] text-white px-4 py-2 rounded hover:scale-105 transition cursor-pointer"
             >
               Go To App
-            </a>
+            </button>
           </div>
         </div>
       ))}
 
+      <Toaster position="top-center" reverseOrder={false} />
+
       {/* Special Mention Section */}
       <div className="mt-24 text-center max-w-2xl mx-auto">
-        <h3 className="text-3xl font-bold text-[#47afa1] mb-4">Special Mention</h3>
+        <h3 className="text-3xl font-bold text-[#47afa1] mb-4">
+          Special Mention
+        </h3>
         <p className="text-gray-300 text-lg">
-          Successfully led a team of 10 members to deliver a data analysis project for{' '}
+          Successfully led a team of 10 members to deliver a data analysis
+          project for{" "}
           <a
             href="https://www.linkedin.com/company/docusign/"
             target="_blank"
@@ -141,8 +175,8 @@ const Works = () => {
             className="hover:underline text-blue-400"
           >
             DocuSign
-          </a>{' '}
-          from conception to deployment, while working at{' '}
+          </a>{" "}
+          from conception to deployment, while working at{" "}
           <a
             href="https://www.linkedin.com/company/dawn-digitech/posts/?feedView=all"
             target="_blank"
@@ -150,7 +184,8 @@ const Works = () => {
             className="hover:underline text-blue-400"
           >
             Dawn Digitech LLP
-          </a>.
+          </a>
+          .
         </p>
       </div>
     </section>

@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <div className="bg-transparent h-screen flex flex-col justify-between relative">
       <header className="flex items-center justify-between px-4 mt-4 w-full max-w-screen-xl mx-auto">
-        <img src={logo} alt="logo" className="h-auto w-16 border rounded-lg border-blue-800" />
+        <img src={logo} alt="logo" className="h-auto w-16 border rounded-md border-black" />
         <div className="flex gap-4 z-50">
           <a href="tel:+919717385313" className="transition-transform hover:scale-110">
             <img src={phone} alt="phone" className="h-auto w-7 p-1 rounded-md transition duration-200 hover:bg-[#007bff]" />
@@ -39,12 +39,14 @@ export default function Home() {
       <div className="flex -mt-16 relative z-60">
         <div className="w-120 px-4 max-w-screen-xl mx-auto relative">
           <img src={portfolioLogo} alt="portfolioLogo" className="w-full h-auto bg-transparent" />
-          <div className="absolute top-1/2 left-1/6 transform -translate-x-1/2 -translate-y-1/2 text-center">
-            <h1 className="font-semibold text-white text-3xl">Shubhang Mishra</h1>
-            <p className="text-[16px] font-semibold italic text-white mt-2 mb-4">Interactive Front End Developer</p>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full px-4">
+            <h1 className="font-semibold text-white text-3xl md:text-4xl">Shubhang Mishra</h1>
+            <p className="text-sm md:text-base font-semibold italic text-white mt-2 mb-4">
+              Interactive Front End Developer
+            </p>
             <button
               onClick={() => setShowDialog(true)}
-              className="bg-gradient-to-r from-[#222d50] via-[#28496e] to-[#2e77a5] py-2 px-6 rounded font-bold text-white cursor-pointer hover:scale-105 transition-transform duration-200 hover:shadow-md"
+              className="bg-none hover:underline font-bold text-white cursor-pointer hover:scale-105 transition-transform duration-200 hover:shadow-md hover:bg-gradient-to-r from-[#222d50] via-[#28496e] to-[#2e77a5] py-2 px-6 rounded"
             >
               About Me
             </button>
@@ -102,6 +104,7 @@ export default function Home() {
       )}
 
       <div className="group self-center mb-16 z-70">
+        
         <button
           onClick={() => navigate("/works")}
           className="group relative bg-gradient-to-r from-[#222d50] via-[#28496e] to-[#2e77a5] py-2 px-6 rounded font-bold text-white cursor-pointer hover:scale-105 transition-transform duration-200 flex items-center justify-center overflow-hidden"
