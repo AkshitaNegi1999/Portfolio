@@ -14,8 +14,20 @@ export default function TechNetwork() {
   const canvasRef = useRef(null);
   const [hoverIndex, setHoverIndex] = useState(null);
   const [points, setPoints] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkScreen = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
@@ -32,10 +44,8 @@ export default function TechNetwork() {
     const generatePoints = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
-
       const baseRadius = Math.min(width, height) / 2.5;
       const radius = width < 768 ? baseRadius * 0.75 : baseRadius;
-
       const centerX = width / 2;
       const centerY = height / 2;
       const angleStep = (2 * Math.PI) / techStack.length;
@@ -55,16 +65,17 @@ export default function TechNetwork() {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
     return () => window.removeEventListener("resize", resizeCanvas);
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
+    if (isMobile) return;
+
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw lines
       for (let i = 0; i < points.length; i++) {
         for (let j = i + 1; j < points.length; j++) {
           const p1 = points[i];
@@ -90,7 +101,6 @@ export default function TechNetwork() {
         }
       }
 
-      // Draw tech labels
       points.forEach((p, index) => {
         ctx.save();
         const color = colorPalette[index % colorPalette.length];
@@ -111,9 +121,11 @@ export default function TechNetwork() {
     };
 
     draw();
-  }, [points, hoverIndex]);
+  }, [points, hoverIndex, isMobile]);
 
   const handleMouseMove = (e) => {
+    if (isMobile) return;
+
     const rect = canvasRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -128,10 +140,36 @@ export default function TechNetwork() {
   };
 
   return (
-    <canvas
-      ref={canvasRef}
-      onMouseMove={handleMouseMove}
-      className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
-    />
+    <>
+      {!isMobile && (
+        <canvas
+          ref={canvasRef}
+          onMouseMove={handleMouseMove}
+          className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
+        />
+      )}
+
+      {isMobile && (
+        <div className="absolute top-0 left-0 p-4 flex flex-col gap-4 z-10">
+          {techStack.map((tech, i) => (
+            <div
+              key={tech}
+              className="flex items-center gap-3 transition-transform duration-200 hover:scale-105"
+            >
+              <div
+                className="w-3.5 h-3.5 rounded-full"
+                style={{ backgroundColor: colorPalette[i % colorPalette.length] }}
+              />
+              <span
+                className="text-white text-sm font-semibold"
+                style={{ color: colorPalette[i % colorPalette.length] }}
+              >
+                {tech}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   );
 }
