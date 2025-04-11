@@ -20,17 +20,26 @@ export default function TechNetwork() {
     const ctx = canvas.getContext("2d");
 
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       generatePoints();
     };
 
     const generatePoints = () => {
-      const radius = Math.min(canvas.width, canvas.height) / 3;
-      const centerX = canvas.width / 2;
-      const centerY = canvas.height / 2;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
 
+      const baseRadius = Math.min(width, height) / 2.5;
+      const radius = width < 768 ? baseRadius * 0.75 : baseRadius;
+
+      const centerX = width / 2;
+      const centerY = height / 2;
       const angleStep = (2 * Math.PI) / techStack.length;
+
       const newPoints = techStack.map((tech, index) => {
         const angle = angleStep * index;
         return {
@@ -55,7 +64,7 @@ export default function TechNetwork() {
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw curved lines
+      // Draw lines
       for (let i = 0; i < points.length; i++) {
         for (let j = i + 1; j < points.length; j++) {
           const p1 = points[i];
@@ -72,8 +81,8 @@ export default function TechNetwork() {
           ctx.moveTo(p1.x, p1.y);
           ctx.quadraticCurveTo(midX, midY - 60, p2.x, p2.y);
           ctx.strokeStyle = gradient;
-          ctx.lineWidth = (i === hoverIndex || j === hoverIndex) ? 2.2 : 1.2;
-          ctx.globalAlpha = (i === hoverIndex || j === hoverIndex) ? 0.8 : 0.18;
+          ctx.lineWidth = (i === hoverIndex || j === hoverIndex) ? 2.2 : 1;
+          ctx.globalAlpha = (i === hoverIndex || j === hoverIndex) ? 0.85 : 0.15;
           ctx.shadowBlur = (i === hoverIndex || j === hoverIndex) ? 10 : 4;
           ctx.shadowColor = gradient;
           ctx.stroke();
@@ -84,13 +93,16 @@ export default function TechNetwork() {
       // Draw tech labels
       points.forEach((p, index) => {
         ctx.save();
-        ctx.shadowColor = colorPalette[index % colorPalette.length];
-        ctx.shadowBlur = index === hoverIndex ? 16 : 6;
-        ctx.fillStyle = colorPalette[index % colorPalette.length];
-        ctx.font = index === hoverIndex ? "bold 17px 'Segoe UI'" : "bold 15px 'Segoe UI'";
+        const color = colorPalette[index % colorPalette.length];
+        const isHovered = index === hoverIndex;
+
+        ctx.shadowColor = color;
+        ctx.shadowBlur = isHovered ? 18 : 5;
+        ctx.fillStyle = color;
+        ctx.font = isHovered ? "bold 17px 'Segoe UI'" : "bold 14px 'Segoe UI'";
         ctx.textAlign = "center";
         ctx.translate(p.x, p.y);
-        if (index === hoverIndex) ctx.scale(1.15, 1.15);
+        if (isHovered) ctx.scale(1.2, 1.2);
         ctx.fillText(p.label, 0, 0);
         ctx.restore();
       });
@@ -102,26 +114,24 @@ export default function TechNetwork() {
   }, [points, hoverIndex]);
 
   const handleMouseMove = (e) => {
-    const { clientX, clientY } = e;
+    const rect = canvasRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
     const found = points.findIndex(p => {
-      const dx = p.x - clientX;
-      const dy = p.y - clientY;
+      const dx = p.x - x;
+      const dy = p.y - y;
       return Math.sqrt(dx * dx + dy * dy) < 50;
     });
+
     setHoverIndex(found);
   };
 
-  const isLargeScreen = typeof window !== "undefined" && window.innerWidth >= 768;
-
   return (
-    <>
-      {isLargeScreen && (
-        <canvas
-          ref={canvasRef}
-          onMouseMove={handleMouseMove}
-          className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
-        />
-      )}
-    </>
+    <canvas
+      ref={canvasRef}
+      onMouseMove={handleMouseMove}
+      className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
+    />
   );
 }
