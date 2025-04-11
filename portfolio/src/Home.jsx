@@ -8,12 +8,16 @@ import portfolioLogo from "./assets/images/portfolioLogo.png";
 import { FaLongArrowAltRight, FaTimes, FaPhoneAlt, FaWhatsapp, FaEnvelope } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import TechStackCanvas from "./TechStackCanvas";
+
 
 export default function Home() {
   const navigate = useNavigate();
   const [showDialog, setShowDialog] = useState(false);
 
   return (
+    <>
+    <TechStackCanvas/>
     <div className="bg-transparent h-screen flex flex-col justify-between relative">
       <header className="flex items-center justify-between px-4 mt-4 w-full max-w-screen-xl mx-auto">
         <img src={logo} alt="logo" className="h-auto w-16 border rounded-md border-black" />
@@ -46,7 +50,7 @@ export default function Home() {
             </p>
             <button
               onClick={() => setShowDialog(true)}
-              className="bg-none hover:underline font-bold text-white cursor-pointer hover:scale-105 transition-transform duration-200 hover:shadow-md hover:bg-gradient-to-r from-[#222d50] via-[#28496e] to-[#2e77a5] py-2 px-6 rounded"
+              className="bg-none hover:underline font-bold text-white cursor-pointer hover:scale-105 transition-transform duration-200 hover:shadow-md hover:bg-gray-600 py-2 px-6 rounded"
             >
               About Me
             </button>
@@ -103,7 +107,7 @@ export default function Home() {
         </div>
       )}
 
-      <div className="group self-center mb-16 z-70">
+      <div className="group self-center mb-8 z-70">
         
         <button
           onClick={() => navigate("/works")}
@@ -118,5 +122,6 @@ export default function Home() {
         </button>
       </div>
     </div>
+    </>
   );
 }
