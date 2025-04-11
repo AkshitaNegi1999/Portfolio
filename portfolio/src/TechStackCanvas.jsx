@@ -44,7 +44,6 @@ function GlobePoints() {
 
   return (
     <group ref={groupRef}>
-      {/* Tech stack text labels */}
       {points.map((p, i) => (
         <Text
           key={`text-${i}`}
@@ -59,7 +58,6 @@ function GlobePoints() {
         </Text>
       ))}
 
-      {/* Node spheres (nearly invisible) */}
       {points.map((p, i) => (
         <mesh key={`dot-${i}`} position={p.position}>
           <sphereGeometry args={[0.015, 4, 4]} /> {/* Tiny size */}
