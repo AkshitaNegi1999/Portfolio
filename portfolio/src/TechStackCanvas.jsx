@@ -1,175 +1,120 @@
-import { useEffect, useRef, useState } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls, Text } from "@react-three/drei";
+import * as THREE from "three";
+import { useMemo, useRef } from "react";
 
 const techStack = [
-  "ReactJS", "NextJS", "JavaScript", "TypeScript", "Node.js", "SQL",
-  "jQuery", "ASP.NET", "TailwindCSS", "Material UI", "ShadCN", "CSS", "HTML5"
+  "React.js",
+  "Next.js",
+  "JavaScript",
+  "TypeScript",
+  "Node.js",
+  "SQL",
+  "jQuery",
+  "ASP.NET",
+  "TailwindCSS",
+  "Material UI",
+  "ShadCN",
+  "CSS",
+  "HTML5",
+  "AWS",
+  "Firebase",
 ];
 
-const colorPalette = [
-  "#66fcf1", "#45a29e", "#8be9fd", "#b084f9", "#f1fa8c", "#ff79c6",
-  "#50fa7b", "#bd93f9", "#ffb86c", "#8afff7", "#9aedfe", "#f093fb", "#6c5ce7"
-];
+function GlobePoints() {
+  const groupRef = useRef();
+  const radius = 2.5;
 
-export default function TechNetwork() {
-  const canvasRef = useRef(null);
-  const [hoverIndex, setHoverIndex] = useState(null);
-  const [points, setPoints] = useState([]);
-  const [isMobile, setIsMobile] = useState(false);
+  const points = useMemo(() => {
+    return techStack.map((label, index) => {
+      const phi = Math.acos(-1 + (2 * index) / techStack.length);
+      const theta = Math.sqrt(techStack.length * Math.PI) * phi;
 
-  useEffect(() => {
-    const checkScreen = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkScreen();
-    window.addEventListener("resize", checkScreen);
-    return () => window.removeEventListener("resize", checkScreen);
+      const x = radius * Math.cos(theta) * Math.sin(phi);
+      const y = radius * Math.sin(theta) * Math.sin(phi);
+      const z = radius * Math.cos(phi);
+
+      return { position: [x, y, z], label };
+    });
   }, []);
 
-  useEffect(() => {
-    if (isMobile) return;
-
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-
-    const resizeCanvas = () => {
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = window.innerWidth + "px";
-      canvas.style.height = window.innerHeight + "px";
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      generatePoints();
-    };
-
-    const generatePoints = () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      const baseRadius = Math.min(width, height) / 2.5;
-      const radius = width < 768 ? baseRadius * 0.75 : baseRadius;
-      const centerX = width / 2;
-      const centerY = height / 2;
-      const angleStep = (2 * Math.PI) / techStack.length;
-
-      const newPoints = techStack.map((tech, index) => {
-        const angle = angleStep * index;
-        return {
-          x: centerX + radius * Math.cos(angle),
-          y: centerY + radius * Math.sin(angle),
-          label: tech
-        };
-      });
-
-      setPoints(newPoints);
-    };
-
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-    return () => window.removeEventListener("resize", resizeCanvas);
-  }, [isMobile]);
-
-  useEffect(() => {
-    if (isMobile) return;
-
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      for (let i = 0; i < points.length; i++) {
-        for (let j = i + 1; j < points.length; j++) {
-          const p1 = points[i];
-          const p2 = points[j];
-
-          const midX = (p1.x + p2.x) / 2;
-          const midY = (p1.y + p2.y) / 2;
-
-          const gradient = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
-          gradient.addColorStop(0, colorPalette[i % colorPalette.length]);
-          gradient.addColorStop(1, colorPalette[j % colorPalette.length]);
-
-          ctx.beginPath();
-          ctx.moveTo(p1.x, p1.y);
-          ctx.quadraticCurveTo(midX, midY - 60, p2.x, p2.y);
-          ctx.strokeStyle = gradient;
-          ctx.lineWidth = (i === hoverIndex || j === hoverIndex) ? 2.2 : 1;
-          ctx.globalAlpha = (i === hoverIndex || j === hoverIndex) ? 0.85 : 0.15;
-          ctx.shadowBlur = (i === hoverIndex || j === hoverIndex) ? 10 : 4;
-          ctx.shadowColor = gradient;
-          ctx.stroke();
-          ctx.globalAlpha = 1;
-        }
-      }
-
-      points.forEach((p, index) => {
-        ctx.save();
-        const color = colorPalette[index % colorPalette.length];
-        const isHovered = index === hoverIndex;
-
-        ctx.shadowColor = color;
-        ctx.shadowBlur = isHovered ? 18 : 5;
-        ctx.fillStyle = color;
-        ctx.font = isHovered ? "bold 17px 'Segoe UI'" : "bold 14px 'Segoe UI'";
-        ctx.textAlign = "center";
-        ctx.translate(p.x, p.y);
-        if (isHovered) ctx.scale(1.2, 1.2);
-        ctx.fillText(p.label, 0, 0);
-        ctx.restore();
-      });
-
-      requestAnimationFrame(draw);
-    };
-
-    draw();
-  }, [points, hoverIndex, isMobile]);
-
-  const handleMouseMove = (e) => {
-    if (isMobile) return;
-
-    const rect = canvasRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const found = points.findIndex(p => {
-      const dx = p.x - x;
-      const dy = p.y - y;
-      return Math.sqrt(dx * dx + dy * dy) < 50;
-    });
-
-    setHoverIndex(found);
-  };
+  useFrame(() => {
+    if (groupRef.current) groupRef.current.rotation.y += 0.002;
+  });
 
   return (
-    <>
-      {!isMobile && (
-        <canvas
-          ref={canvasRef}
-          onMouseMove={handleMouseMove}
-          className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
-        />
-      )}
+    <group ref={groupRef}>
+      {/* Tech stack text labels */}
+      {points.map((p, i) => (
+        <Text
+          key={`text-${i}`}
+          position={p.position}
+          fontSize={0.18} // Slightly smaller
+          color="#b0c4de" // A refined, mature tone
+          anchorX="center"
+          anchorY="middle"
+          fontWeight="bold"
+        >
+          {p.label}
+        </Text>
+      ))}
 
-      {isMobile && (
-        <div className="absolute top-0 left-0 p-4 flex flex-col gap-4 z-10">
-          {techStack.map((tech, i) => (
-            <div
-              key={tech}
-              className="flex items-center gap-3 transition-transform duration-200 hover:scale-105"
-            >
-              <div
-                className="w-3.5 h-3.5 rounded-full"
-                style={{ backgroundColor: colorPalette[i % colorPalette.length] }}
-              />
-              <span
-                className="text-white text-sm font-semibold"
-                style={{ color: colorPalette[i % colorPalette.length] }}
-              >
-                {tech}
-              </span>
-            </div>
-          ))}
-        </div>
+      {/* Node spheres (nearly invisible) */}
+      {points.map((p, i) => (
+        <mesh key={`dot-${i}`} position={p.position}>
+          <sphereGeometry args={[0.015, 4, 4]} /> {/* Tiny size */}
+          <meshStandardMaterial color="transparent" transparent opacity={0} />
+        </mesh>
+      ))}
+
+      {/* Curved lines between nodes */}
+      {points.map((p1, i) =>
+        points.map((p2, j) => {
+          if (i >= j) return null;
+
+          const dist = new THREE.Vector3(...p1.position).distanceTo(
+            new THREE.Vector3(...p2.position)
+          );
+          if (dist > 2.5) return null;
+
+          const curve = new THREE.QuadraticBezierCurve3(
+            new THREE.Vector3(...p1.position),
+            new THREE.Vector3(0, 0, 0),
+            new THREE.Vector3(...p2.position)
+          );
+
+          const curvePoints = curve.getPoints(30);
+          const geometry = new THREE.BufferGeometry().setFromPoints(
+            curvePoints
+          );
+
+          return (
+            <line key={`line-${i}-${j}`} geometry={geometry}>
+              <lineBasicMaterial color="#666666" linewidth={1} />
+            </line>
+          );
+        })
       )}
-    </>
+    </group>
+  );
+}
+
+export default function TechStackCanvas() {
+  if (typeof window !== "undefined" && window.innerWidth < 768) return null;
+
+  return (
+    <div className="fixed top-0 left-0 w-full h-full z-0 hidden md:block pointer-events-none">
+      <Canvas camera={{ position: [0, 0, 6], fov: 60 }}>
+        <ambientLight intensity={0.6} />
+        <pointLight position={[10, 10, 10]} />
+        <GlobePoints />
+        <OrbitControls
+          enableZoom={false}
+          enablePan={false}
+          autoRotate
+          autoRotateSpeed={0.5}
+        />
+      </Canvas>
+    </div>
   );
 }
