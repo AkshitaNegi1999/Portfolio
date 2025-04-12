@@ -8,7 +8,7 @@ import portfolioLogo from "./assets/images/portfolioLogo.png";
 import {
   FaLongArrowAltRight,
   FaTimes,
-  FaPhoneAlt,
+  FaPhoneAlt, 
   FaWhatsapp,
   FaEnvelope,
 } from "react-icons/fa";
@@ -30,14 +30,19 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import TechStackCanvas from "./TechStackCanvas";
 
+
+
 export default function Home() {
   const navigate = useNavigate();
   const [showDialog, setShowDialog] = useState(false);
   const [showTechDialog, setShowTechDialog] = useState(false);
 
+  
+
   return (
     <>
       <TechStackCanvas />
+      
       <div className="bg-transparent h-screen flex flex-col justify-between relative">
         <header className="flex items-center justify-between px-4 mt-4 w-full max-w-screen-xl mx-auto">
           <img
