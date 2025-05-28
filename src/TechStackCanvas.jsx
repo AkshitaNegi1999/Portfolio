@@ -10,8 +10,6 @@ const techStack = [
   "TypeScript",
   "Node.js",
   "SQL",
-  "jQuery",
-  "ASP.NET",
   "TailwindCSS",
   "Material UI",
   "ShadCN",

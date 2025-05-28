@@ -52,7 +52,7 @@ export default function Home() {
           />
           <div className="flex gap-4 z-50">
             <a
-              href="tel:+919717385313"
+              href="tel:+919958806791"
               className="transition-transform hover:scale-110"
             >
               <img
@@ -62,7 +62,7 @@ export default function Home() {
               />
             </a>
             <a
-              href="https://wa.me/9717385313?text=Hi Shubhang, saw your portfolio."
+              href="https://wa.me/9958806791?text=Hi Akshita, saw your portfolio."
               target="_blank"
               rel="noopener noreferrer"
               className="transition-transform hover:scale-110"
@@ -74,7 +74,7 @@ export default function Home() {
               />
             </a>
             <a
-              href="https://www.linkedin.com/in/shubhang-mishra-833408184/"
+              href="https://www.linkedin.com/in/akshita-negi-694a67239/"
               target="_blank"
               rel="noopener noreferrer"
               className="transition-transform hover:scale-110"
@@ -86,7 +86,7 @@ export default function Home() {
               />
             </a>
             <a
-              href="mailto:shubhangmishra999@gmail.com"
+              href="mailto:aananegi1999@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
               className="transition-transform hover:scale-110"
@@ -98,7 +98,7 @@ export default function Home() {
               />
             </a>
             <a
-              href="https://github.com/Shubh-31"
+              href="https://github.com/AkshitaNegi1999"
               target="_blank"
               rel="noopener noreferrer"
               className="transition-transform hover:scale-110"
@@ -121,7 +121,7 @@ export default function Home() {
             />
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full px-4">
               <h1 className="font-semibold text-white text-3xl md:text-4xl">
-                Shubhang Mishra
+                Akshita Negi
               </h1>
               <p className="text-sm md:text-base font-semibold italic text-white mt-2 mb-4">
                 Interactive Front End Developer
@@ -155,26 +155,9 @@ export default function Home() {
               </p>
               <p className="text-sm text-gray-300 text-center mb-2">
                 💼 Currently working at{" "}
-                <span className="text-blue-400">Advayanethra Pvt Ltd</span>
+                <span className="text-blue-400">JK International</span>
               </p>
-              <p className="text-sm text-gray-300 text-center mb-2">
-                🧑‍💼 Former Team Lead at{" "}
-                <a
-                  href="https://www.linkedin.com/company/dawn-digitech/posts/?feedView=all"
-                  className="text-blue-400 hover:underline"
-                  target="_blank"
-                >
-                  Dawn Digitech LLP
-                </a>{" "}
-                where I led a team of 10 members on a client project for{" "}
-                <a
-                  href="https://www.docusign.com/"
-                  className="text-blue-400 hover:underline"
-                  target="_blank"
-                >
-                  DocuSign
-                </a>
-              </p>
+             
               <p className="text-sm text-gray-300 text-center mb-2">
                 🎓 Master's in Computer Science from{" "}
                 <a
@@ -188,7 +171,7 @@ export default function Home() {
               </p>
               <p className="text-sm text-gray-300 text-center mb-4">
                 💻 Tech Stack: React.js, Next.js, TailwindCSS, JavaScript,
-                Firebase, Node.js, Express.js, jQuery, ASP.NET, Git
+                Firebase, Node.js, Express.js, Git
               </p>
               <div className="text-sm text-gray-300 text-center mb-4">
                 <h3 className="text-white font-semibold mb-2">
@@ -196,25 +179,20 @@ export default function Home() {
                 </h3>
                 <ul className="space-y-1">
                   <li>
-                    • Joined <strong>Dawn Digitech LLP</strong> – Nov 2021
-                  </li>
-                  <li>• Transitioned from Dawn Digitech – Feb 2023</li>
-                  <li>
-                    • Started at <strong>Advayanethra Pvt Ltd</strong> – Feb
-                    2023
+                    • Currently working <strong>JK International</strong> – Nov 2023
                   </li>
                   <li>• Pursued Msc CS at MDU – 2021 to 2023</li>
                 </ul>
               </div>
               <div className="flex justify-center gap-4 mt-4">
                 <a
-                  href="tel:+919717385313"
+                  href="tel:+919958806791"
                   className="bg-[#1d3557] hover:bg-[#457b9d] px-4 py-2 rounded text-white text-sm flex items-center gap-2"
                 >
                   <FaPhoneAlt />
                 </a>
                 <a
-                  href="https://wa.me/9717385313?text=Hi Shubhang, saw your portfolio."
+                  href="https://wa.me/9958806791?text=Hi Akshita, saw your portfolio."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#1d7933] hover:bg-[#25D366] px-4 py-2 rounded text-white text-sm flex items-center gap-2"
@@ -222,7 +200,7 @@ export default function Home() {
                   <FaWhatsapp />
                 </a>
                 <a
-                  href="mailto:shubhangmishra999@gmail.com"
+                  href="mailto:aananegi1999@gmail.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#6a040f] hover:bg-[#ea4335] px-4 py-2 rounded text-white text-sm flex items-center gap-2"
@@ -260,9 +238,7 @@ export default function Home() {
                     <li className="flex items-center gap-1">
                       <SiTailwindcss className="text-sky-400" /> TailwindCSS
                     </li>
-                    <li className="flex items-center gap-1">
-                      <SiJquery className="text-blue-400" /> jQuery
-                    </li>
+
                     <li className="flex items-center gap-1">
                       <SiHtml5 className="text-orange-600" /> HTML5
                     </li>
@@ -280,9 +256,7 @@ export default function Home() {
                     <li className="flex items-center gap-1">
                       <SiExpress className="text-gray-300" /> Express.js
                     </li>
-                    <li className="flex items-center gap-1">
-                      <SiDotnet className="text-purple-400" /> ASP.NET
-                    </li>
+                   
                   </ul>
                 </div>
                 <div>
@@ -302,13 +276,13 @@ export default function Home() {
               </div>
               <div className="flex justify-center gap-4 mt-6">
                 <a
-                  href="tel:+919717385313"
+                  href="tel:+919958806791"
                   className="bg-[#1d3557] hover:bg-[#457b9d] px-4 py-2 rounded text-white text-sm flex items-center gap-2"
                 >
                   <FaPhoneAlt />
                 </a>
                 <a
-                  href="https://wa.me/9717385313?text=Hi Shubhang, saw your portfolio."
+                  href="https://wa.me/9958806791?text=Hi Akshita, saw your portfolio."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#1d7933] hover:bg-[#25D366] px-4 py-2 rounded text-white text-sm flex items-center gap-2"
@@ -316,7 +290,7 @@ export default function Home() {
                   <FaWhatsapp />
                 </a>
                 <a
-                  href="mailto:shubhangmishra999@gmail.com"
+                  href="mailto:aananegi1999@gmail.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-[#6a040f] hover:bg-[#ea4335] px-4 py-2 rounded text-white text-sm flex items-center gap-2"
